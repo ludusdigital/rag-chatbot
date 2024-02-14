@@ -3,13 +3,17 @@ from llama_index.core import VectorStoreIndex, ServiceContext, Document
 from llama_index.llms.openai import OpenAI
 import openai
 from llama_index.core import SimpleDirectoryReader
+import os
 
 st.set_page_config(page_title="RAG chatbot",
                    page_icon="🤖",
                    layout="centered",
                    initial_sidebar_state="auto",
                    menu_items=None)
-openai.api_key = st.secrets.openai_key
+
+# Ovde unosimo OpenAI API ključ da bi ChatGPT model mogao da radi
+openai.api_key = os.environ['OPENAI_API_KEY']
+
 st.title("Razgovor sa mojim znanjem 🧠")
 
 if "messages" not in st.session_state.keys(
