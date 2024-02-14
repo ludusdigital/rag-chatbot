@@ -1,5 +1,5 @@
 
-# RAG Chatbot sa Streamlit-om
+# RAG Chatbot za razgovor sa našim podacima
 
 ## Opis
 
