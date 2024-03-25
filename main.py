@@ -11,7 +11,7 @@ st.set_page_config(page_title="RAG chatbot", page_icon="🤖", layout="centered"
 
 openai.api_key = os.environ['OPENAI_API_KEY']
 
-st.title("Razgovor sa mojim znanjem 🧠")
+st.title("Ask my knowledge 🧠")
 
 if 'messages' not in st.session_state:
     st.session_state['messages'] = []
@@ -20,7 +20,7 @@ if 'messages' not in st.session_state:
 if not os.path.exists('data'):
     os.makedirs('data')
 
-uploaded_file = st.file_uploader("Uploaduj .txt, .pdf ili .docx fajl", type=['txt', 'pdf', 'docx'])
+uploaded_file = st.file_uploader("Upload .txt, .pdf ili .docx fajl", type=['txt', 'pdf', 'docx'])
 if uploaded_file is not None:
     if uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
         # Ako je fajl .docx, koristite docx2txt za ekstrakciju teksta
@@ -37,7 +37,7 @@ if uploaded_file is not None:
         st.success(f"'{uploaded_file.name}' je uspešno sačuvan.")
     
     def load_data():
-        with st.spinner(text="Učitavam podatke iz baze! Ovo može da potraje 1-2 minuta."):
+        with st.spinner(text="Loading data from the database. This may take 1-2 minutes."):
             reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
             docs = reader.load_data()
             service_context = ServiceContext.from_defaults(llm=OpenAI(
@@ -55,7 +55,7 @@ if uploaded_file is not None:
     if "messages" not in st.session_state:
         st.session_state.messages = [{"role": "assistant", "content": "Baza vašeg znanja je učitana i spreman sam za pitanja 🧠🚀"}]
 
-if prompt := st.chat_input("Tvoje pitanje"):
+if prompt := st.chat_input("Your question"):
     st.session_state.messages.append({"role": "user", "content": prompt})
 
 for message in st.session_state.messages:
@@ -71,7 +71,7 @@ for message in st.session_state.messages:
 # Pre nego što pokušate da pristupite poslednjoj poruci, proverite da li lista sadrži neke poruke
 if len(st.session_state.messages) > 0 and st.session_state.messages[-1]["role"] != "assistant" and "data_loaded" in st.session_state:
     with st.chat_message("assistant", avatar="🧠"):
-        with st.spinner("Razmišljam..."):
+        with st.spinner("Thinking..."):
             response = st.session_state.chat_engine.chat(prompt)
             st.write(response.response)
             message = {"role": "assistant", "content": response.response}
