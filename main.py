@@ -20,7 +20,7 @@ if 'messages' not in st.session_state:
 if not os.path.exists('data'):
     os.makedirs('data')
 
-uploaded_file = st.file_uploader("Upload .txt, .pdf ili .docx fajl", type=['txt', 'pdf', 'docx'])
+uploaded_file = st.file_uploader("Upload .txt, .pdf or .docx file", type=['txt', 'pdf', 'docx'])
 if uploaded_file is not None:
     if uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
         # Ako je fajl .docx, koristite docx2txt za ekstrakciju teksta
