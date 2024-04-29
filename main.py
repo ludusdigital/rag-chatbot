@@ -28,7 +28,7 @@ if uploaded_file is not None:
         file_path = os.path.join('data', uploaded_file.name.replace('.docx', '.txt'))
         with open(file_path, "w") as text_file:
             text_file.write(text)
-        st.success(f"'{uploaded_file.name}' je uspešno sačuvan kao tekst.")
+        st.success(f"'{uploaded_file.name}' has been successfully saved.")
     else:
         # Obrada za .txt i .pdf ostaje ista
         file_path = os.path.join('data', uploaded_file.name)
