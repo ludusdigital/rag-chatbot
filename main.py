@@ -43,7 +43,7 @@ if uploaded_file is not None:
             service_context = ServiceContext.from_defaults(llm=OpenAI(
                 model="gpt-3.5-turbo-1106",
                 temperature=0.5,
-                system_prompt="Ti si ekspert za davanje preciznih i efikasnih odgovora vezano za moju bazu znanja. Jezik: svaki odgovor isključivo piši na srpskom jeziku, koristeći srpsku gramatiku."
+                system_prompt="You are an expert in providing accurate and efficient responses related to my knowledge base."
             ))
             index = VectorStoreIndex.from_documents(docs, service_context=service_context)
             return index
@@ -53,7 +53,7 @@ if uploaded_file is not None:
     st.session_state.data_loaded = True  # Označava da su podaci učitani
     # Postavljanje poruke o uspešnom učitavanju podataka
     if "messages" not in st.session_state:
-        st.session_state.messages = [{"role": "assistant", "content": "Baza vašeg znanja je učitana i spreman sam za pitanja 🧠🚀"}]
+        st.session_state.messages = [{"role": "assistant", "content": "Your knowledge base is loaded and I am ready for questions 🧠🚀"}]
 
 if prompt := st.chat_input("Your question"):
     st.session_state.messages.append({"role": "user", "content": prompt})
