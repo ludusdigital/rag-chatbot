@@ -28,13 +28,13 @@ if uploaded_file is not None:
         file_path = os.path.join('data', uploaded_file.name.replace('.docx', '.txt'))
         with open(file_path, "w") as text_file:
             text_file.write(text)
-        st.success(f"'{uploaded_file.name}' has been successfully saved.")
+        st.success(f"'{uploaded_file.name}' has been successfully saved as text.")
     else:
         # Obrada za .txt i .pdf ostaje ista
         file_path = os.path.join('data', uploaded_file.name)
         with open(file_path, "wb") as f:
             shutil.copyfileobj(uploaded_file, f)
-        st.success(f"'{uploaded_file.name}' je uspešno sačuvan.")
+        st.success(f"'{uploaded_file.name}' has been successfully saved.")
     
     def load_data():
         with st.spinner(text="Loading data from the database. This may take 1-2 minutes."):
